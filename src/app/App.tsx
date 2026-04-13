@@ -681,31 +681,91 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="relative overflow-hidden rounded-xl bg-white border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-300 group"
+                whileHover={{ y: -12, scale: 1.02 }}
+                className="relative overflow-hidden rounded-xl bg-white border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-500 group cursor-pointer"
               >
                 <div className="absolute inset-0">
-                  <img
+                  <ImageWithFallback
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75"
                   />
-                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300" />
+                  {/* Animated overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                    initial={{ opacity: 0.6 }}
+                    whileHover={{ opacity: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  {/* Hover overlay with animated border */}
+                  <motion.div
+                    className="absolute inset-0 border-2 border-[#F59E0B]/0 group-hover:border-[#F59E0B]/60 rounded-xl transition-all duration-300"
+                    initial={{ scale: 0.95 }}
+                    whileHover={{ scale: 1 }}
+                  />
                 </div>
-                <div className="relative p-8 h-full flex flex-col">
-                  <div className="text-[#F59E0B] group-hover:scale-110 transition-transform mb-6">
+
+                {/* Content Container */}
+                <div className="relative p-8 h-full flex flex-col min-h-[400px]">
+                  {/* Icon with enhanced animation */}
+                  <motion.div
+                    className="text-[#F59E0B] mb-6 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12"
+                    whileHover={{
+                      rotate: [0, -10, 10, -5, 5, 0],
+                      transition: { duration: 0.6 },
+                    }}
+                  >
                     {service.icon}
-                  </div>
-                  <h3
-                    className="text-xl font-bold text-white mb-4 group-hover:text-[#F59E0B] transition-colors duration-300"
+                  </motion.div>
+
+                  {/* Title with slide animation */}
+                  <motion.h3
+                    className="text-xl font-bold text-white mb-4 transition-all duration-300 group-hover:text-[#F59E0B]"
                     style={{ fontFamily: "Poppins, sans-serif" }}
+                    initial={{ y: 0 }}
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.3 }}
                   >
                     {service.title}
-                  </h3>
-                  <p className="text-gray-200 leading-relaxed flex-grow">
+                  </motion.h3>
+
+                  {/* Description with fade and slide animation */}
+                  <motion.p
+                    className="text-gray-200 leading-relaxed flex-grow transition-all duration-300"
+                    initial={{ opacity: 1, y: 0 }}
+                    whileHover={{
+                      opacity: 0.9,
+                      y: -3,
+                      transition: { duration: 0.3 },
+                    }}
+                  >
                     {service.description}
-                  </p>
+                  </motion.p>
+
+                  {/* Animated call-to-action indicator */}
+                  <motion.div
+                    className="mt-6 flex items-center text-[#F59E0B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ x: -20 }}
+                    whileHover={{ x: 0 }}
+                  >
+                    <span className="text-sm font-semibold mr-2">
+                      Learn More
+                    </span>
+                    <motion.div
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.div>
+                  </motion.div>
                 </div>
+
+                {/* Loading shimmer effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "100%" }}
+                />
               </motion.div>
             ))}
           </div>

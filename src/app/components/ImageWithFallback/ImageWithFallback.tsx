@@ -42,8 +42,23 @@ export function ImageWithFallback(
   return (
     <div className={`relative ${className ?? ""}`} style={style}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80">
-          <div className="h-10 w-10 rounded-full border-4 border-[#F59E0B]/30 border-t-[#F59E0B] animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100/90 to-gray-200/90 backdrop-blur-sm">
+          <div className="relative">
+            {/* Outer ring */}
+            <div className="h-12 w-12 rounded-full border-4 border-[#F59E0B]/20 border-t-[#F59E0B] animate-spin" />
+            {/* Inner ring */}
+            <div
+              className="absolute inset-2 h-6 w-6 rounded-full border-2 border-[#F59E0B]/40 border-t-[#F59E0B] animate-spin"
+              style={{
+                animationDirection: "reverse",
+                animationDuration: "0.8s",
+              }}
+            />
+            {/* Center dot */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-2 w-2 bg-[#F59E0B] rounded-full animate-pulse" />
+            </div>
+          </div>
         </div>
       )}
       <img
