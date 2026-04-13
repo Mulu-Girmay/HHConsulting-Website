@@ -694,7 +694,7 @@ export default function App() {
                       Head Office
                     </h4>
                     <p className="text-gray-600">
-                      Bole Road, Atlas Building 5th Floor
+                      22 Mazoriya, Efrata Building, 3rd Floor
                       <br />
                       Addis Ababa, Ethiopia
                     </p>
@@ -707,8 +707,9 @@ export default function App() {
                   </div>
                   <div>
                     <h4 className="font-bold text-[#0F172A] mb-1">Phone</h4>
-                    <p className="text-gray-600">+251 11 661 8899</p>
-                    <p className="text-gray-600">+251 11 661 9900</p>
+                    <p className="text-gray-600">011 8683830</p>
+                    <p className="text-gray-600">011 6672951</p>
+                    <p className="text-gray-600">+251 913592121</p>
                   </div>
                 </div>
 
@@ -718,8 +719,9 @@ export default function App() {
                   </div>
                   <div>
                     <h4 className="font-bold text-[#0F172A] mb-1">Email</h4>
-                    <p className="text-gray-600">info@hhconsulting.et</p>
-                    <p className="text-gray-600">projects@hhconsulting.et</p>
+                    <p className="text-gray-600">
+                      hhconsultingarchitectengineers@gmail.com
+                    </p>
                   </div>
                 </div>
               </div>
