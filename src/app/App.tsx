@@ -34,7 +34,6 @@ type Project = {
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
-  const [showAbout, setShowAbout] = useState(false);
 
   const services = [
     {
@@ -369,15 +368,6 @@ export default function App() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <button
-                onClick={() => setShowAbout(!showAbout)}
-                className="group inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#F59E0B] px-6 py-3 sm:px-8 sm:py-4 text-[#0F172A] font-semibold hover:bg-[#F59E0B]/90 transition-all duration-300 shadow-lg shadow-[#F59E0B]/20"
-              >
-                {showAbout ? "Hide About" : "Learn About Us"}
-                <ChevronRight
-                  className={`w-5 h-5 ml-2 transition-transform ${showAbout ? "rotate-90" : "group-hover:translate-x-1"}`}
-                />
-              </button>
               <a
                 href="#contact"
                 className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-white bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-white font-semibold hover:bg-white hover:text-[#0F172A] transition-all duration-300"
@@ -406,258 +396,254 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      {showAbout && (
-        <motion.section
-          id="about"
-          className="py-20 lg:py-32 bg-white"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+      <motion.section
+        id="about"
+        className="py-20 lg:py-32 bg-white"
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: "auto" }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
+                style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
-                <h2
-                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  Building Africa's Future
-                </h2>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  HH Consulting Architects & Engineers PLC is a
-                  multidisciplinary consulting firm delivering high-quality
-                  architectural and engineering solutions for projects across
-                  Ethiopia and Djibouti.
-                </p>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  The company specializes in building design, infrastructure
-                  development, construction supervision, and environmental and
-                  feasibility studies. With a team of skilled engineers,
-                  architects, and technical experts, HH Consulting integrates
-                  innovation, sustainability, and local expertise into every
-                  project.
-                </p>
-                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  From high-rise buildings and airports to roads, bridges, and
-                  irrigation systems, the firm is committed to delivering
-                  practical, efficient, and impactful solutions that support
-                  community development and economic growth.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  We create with heart, and build with mind.
-                </p>
-              </motion.div>
+                Building Africa's Future
+              </h2>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                HH Consulting Architects & Engineers PLC is a multidisciplinary
+                consulting firm delivering high-quality architectural and
+                engineering solutions for projects across Ethiopia and Djibouti.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                The company specializes in building design, infrastructure
+                development, construction supervision, and environmental and
+                feasibility studies. With a team of skilled engineers,
+                architects, and technical experts, HH Consulting integrates
+                innovation, sustainability, and local expertise into every
+                project.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                From high-rise buildings and airports to roads, bridges, and
+                irrigation systems, the firm is committed to delivering
+                practical, efficient, and impactful solutions that support
+                community development and economic growth.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                We create with heart, and build with mind.
+              </p>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
-              >
-                {/* Storytelling Animation Container */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8">
-                  {/* Animated Background Images */}
-                  <div className="absolute inset-0">
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80"
-                        alt="Architectural design"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 1,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
-                        alt="Engineering blueprints"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
-                        alt="Construction site"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 3,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
-                        alt="Bridge construction"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 4,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
-                        alt="Environmental planning"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 5,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
-                        alt="Modern infrastructure"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 6,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=800&q=80"
-                        alt="Urban development"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        duration: 2,
-                        delay: 7,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <img
-                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
-                        alt="Construction management"
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  </div>
-
-                  {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/70"></div>
-
-                  {/* Story Text Overlay */}
-                  <div className="relative z-10 text-center text-white">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
-                    >
-                      <h3 className="text-2xl font-bold mb-4">Our Journey</h3>
-                      <div className="space-y-3 text-sm leading-relaxed max-w-md mx-auto">
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 1, delay: 1 }}
-                        >
-                          From concept to completion, we transform visions into
-                          reality
-                        </motion.p>
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 1, delay: 2 }}
-                        >
-                          Every project tells a story of innovation and
-                          excellence
-                        </motion.p>
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 1, delay: 3 }}
-                        >
-                          Building sustainable solutions for Africa's future
-                        </motion.p>
-                      </div>
-                    </motion.div>
-                  </div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              {/* Storytelling Animation Container */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8">
+                {/* Animated Background Images */}
+                <div className="absolute inset-0">
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80"
+                      alt="Architectural design"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 1,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+                      alt="Engineering blueprints"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 2,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+                      alt="Construction site"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+                      alt="Bridge construction"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 4,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+                      alt="Environmental planning"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 5,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
+                      alt="Modern infrastructure"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 6,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=800&q=80"
+                      alt="Urban development"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      duration: 2,
+                      delay: 7,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+                      alt="Construction management"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
                 </div>
 
-                <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10 rounded-full"></div>
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#F59E0B]/5 -z-10 rounded-full"></div>
-              </motion.div>
-            </div>
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/70"></div>
+
+                {/* Story Text Overlay */}
+                <div className="relative z-10 text-center text-white">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  >
+                    <h3 className="text-2xl font-bold mb-4">Our Journey</h3>
+                    <div className="space-y-3 text-sm leading-relaxed max-w-md mx-auto">
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1 }}
+                      >
+                        From concept to completion, we transform visions into
+                        reality
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 2 }}
+                      >
+                        Every project tells a story of innovation and excellence
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 3 }}
+                      >
+                        Building sustainable solutions for Africa's future
+                      </motion.p>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10 rounded-full"></div>
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#F59E0B]/5 -z-10 rounded-full"></div>
+            </motion.div>
           </div>
-        </motion.section>
-      )}
+        </div>
+      </motion.section>
 
       {/* Services Section */}
       <section id="services" className="py-20 lg:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="text-center mb-16"
           >
             <div className="h-2 w-20 bg-[#F59E0B] mx-auto mb-6"></div>
@@ -678,10 +664,10 @@ export default function App() {
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
                 whileHover={{ y: -12, scale: 1.02 }}
+                whileTap={{ y: -12, scale: 1.02 }}
                 className="relative overflow-hidden rounded-xl bg-white border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-500 group cursor-pointer"
               >
                 <div className="absolute inset-0">
@@ -711,6 +697,10 @@ export default function App() {
                   <motion.div
                     className="text-[#F59E0B] mb-6 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12"
                     whileHover={{
+                      rotate: [0, -10, 10, -5, 5, 0],
+                      transition: { duration: 0.6 },
+                    }}
+                    whileTap={{
                       rotate: [0, -10, 10, -5, 5, 0],
                       transition: { duration: 0.6 },
                     }}
