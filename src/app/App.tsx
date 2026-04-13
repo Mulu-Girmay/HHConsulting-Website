@@ -196,7 +196,7 @@ export default function App() {
         className="fixed top-0 left-0 right-0 z-50 bg-[#0F172A]/95 backdrop-blur-sm border-b border-[#F59E0B]/20"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-13">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -269,7 +269,7 @@ export default function App() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -281,8 +281,8 @@ export default function App() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 sm:pt-28">
-          <div className="relative max-w-3xl lg:max-w-4xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 lg:p-12 shadow-2xl shadow-[#000000]/20 overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-24 lg:pt-28">
+          <div className="relative max-w-3xl lg:max-w-4xl bg-white/2 backdrop-blur-sm border border-white/10 rounded-[2rem] p-6 sm:p-8 lg:p-12 shadow-2xl shadow-[#000000]/20 overflow-hidden">
             <div className="pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full bg-[#F59E0B]/10 blur-3xl"></div>
             <div className="pointer-events-none absolute -bottom-10 left-6 h-28 w-28 rounded-full bg-[#F59E0B]/15 blur-3xl"></div>
 
@@ -292,12 +292,8 @@ export default function App() {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-4 py-2 mb-6 text-sm text-[#F59E0B] font-semibold">
-                <span className="inline-block h-2 w-2 rounded-full bg-[#F59E0B]"></span>
-                Established 1994 — Addis Ababa
-              </div>
               <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+                className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Landmark buildings.
@@ -310,7 +306,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl"
+              className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl"
             >
               Bringing Ethiopian engineering ambition to life with clean design,
               local insight, and confident delivery.
@@ -384,27 +380,32 @@ export default function App() {
             >
               <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
               <h2
-                className="text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Building Africa's Future
               </h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Founded in Ethiopia in 1994, HH Consulting Architects &
-                Engineers PLC has grown into one of Africa's most trusted
-                consulting firms, delivering world-class engineering and
-                architectural solutions across 15 countries.
+                HH Consulting Architects & Engineers PLC is a multidisciplinary
+                consulting firm delivering high-quality architectural and
+                engineering solutions for projects across Ethiopia and Djibouti.
               </p>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Our team of internationally trained engineers and architects
-                combines global expertise with deep local knowledge, creating
-                sustainable infrastructure that serves communities and drives
-                economic growth.
+                The company specializes in building design, infrastructure
+                development, construction supervision, and environmental and
+                feasibility studies. With a team of skilled engineers,
+                architects, and technical experts, HH Consulting integrates
+                innovation, sustainability, and local expertise into every
+                project.
+              </p>
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                From high-rise buildings and airports to roads, bridges, and
+                irrigation systems, the firm is committed to delivering
+                practical, efficient, and impactful solutions that support
+                community development and economic growth.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                We are committed to innovation, environmental responsibility,
-                and excellence in every project we undertake—from iconic
-                buildings to critical infrastructure that connects nations.
+                We create with heart, and build with mind.
               </p>
             </motion.div>
 
@@ -444,7 +445,7 @@ export default function App() {
           >
             <div className="h-2 w-20 bg-[#F59E0B] mx-auto mb-6"></div>
             <h2
-              className="text-4xl lg:text-5xl font-bold text-[#0F172A] mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-4"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               Our Services
@@ -495,7 +496,7 @@ export default function App() {
           >
             <div className="h-2 w-20 bg-[#F59E0B] mx-auto mb-6"></div>
             <h2
-              className="text-4xl lg:text-5xl font-bold text-white mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               Featured Projects
@@ -620,7 +621,7 @@ export default function App() {
           >
             <div className="h-2 w-20 bg-[#F59E0B] mx-auto mb-6"></div>
             <h2
-              className="text-4xl lg:text-5xl font-bold text-[#0F172A] mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-4"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               Leadership Team
@@ -641,7 +642,7 @@ export default function App() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center group"
               >
-                <div className="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-[#0F172A] to-[#1e293b] flex items-center justify-center overflow-hidden relative rounded-full">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto mb-6 bg-gradient-to-br from-[#0F172A] to-[#1e293b] flex items-center justify-center overflow-hidden relative rounded-full">
                   <div className="absolute inset-0 bg-[#F59E0B]/0 group-hover:bg-[#F59E0B]/10 transition-colors duration-300 rounded-full"></div>
                   <ImageWithFallback
                     src={member.image}
@@ -673,7 +674,7 @@ export default function App() {
             >
               <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
               <h2
-                className="text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Get in Touch
