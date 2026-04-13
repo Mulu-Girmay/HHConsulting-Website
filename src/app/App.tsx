@@ -15,13 +15,10 @@ import {
 } from "lucide-react";
 import { ImageWithFallback } from "./components/ImageWithFallback/ImageWithFallback";
 
-// Import team images
 import haileImage from "../assets/haile.png";
 import saraImage from "../assets/Sara.png";
 import yitbarekImage from "../assets/yitbarek.png";
 import haileGImage from "../assets/HaileG.png";
-
-// Import logo
 import logoImage from "../assets/logo.png";
 
 type Project = {
@@ -204,26 +201,13 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="flex items-center gap-3"
+              className="rounded-3xl bg-white/5 border border-white/10 shadow-[0_20px_60px_-40px_rgba(245,158,11,0.75)] p-3"
             >
-              <div className="w-12 h-12 bg-[#F59E0B] flex items-center justify-center rounded">
-                <ImageWithFallback
-                  src={logoImage}
-                  alt="HH Consulting Logo"
-                  className="w-8 h-8 object-contain"
-                />
-              </div>
-              <div>
-                <div
-                  className="text-white font-bold text-lg leading-tight"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  Consulting
-                </div>
-                <div className="text-[#F59E0B] text-xs">
-                  Architects & Engineers
-                </div>
-              </div>
+              <ImageWithFallback
+                src={logoImage}
+                alt="HH Consulting Logo"
+                className="h-12 w-auto"
+              />
             </motion.div>
 
             {/* Desktop Menu */}
@@ -236,7 +220,7 @@ export default function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * i }}
                     href={`#${item.toLowerCase()}`}
-                    className="text-white hover:text-[#F59E0B] transition-colors duration-300"
+                    className="text-white/90 uppercase tracking-[0.12em] font-semibold hover:text-[#F59E0B] transition-colors duration-300"
                   >
                     {item}
                   </motion.a>
@@ -297,26 +281,28 @@ export default function App() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-3xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 sm:pt-28">
+          <div className="relative max-w-3xl lg:max-w-4xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 lg:p-12 shadow-2xl shadow-[#000000]/20 overflow-hidden">
+            <div className="pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full bg-[#F59E0B]/10 blur-3xl"></div>
+            <div className="pointer-events-none absolute -bottom-10 left-6 h-28 w-28 rounded-full bg-[#F59E0B]/15 blur-3xl"></div>
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-              <div className="inline-block px-4 py-2 bg-[#F59E0B]/10 border border-[#F59E0B]/30 mb-6">
-                <span className="text-[#F59E0B] text-sm font-medium">
-                  Established 1994
-                </span>
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 px-4 py-2 mb-6 text-sm text-[#F59E0B] font-semibold">
+                <span className="inline-block h-2 w-2 rounded-full bg-[#F59E0B]"></span>
+                Established 1994 — Addis Ababa
               </div>
               <h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                Engineered Excellence.
+                Landmark buildings.
                 <br />
-                <span className="text-[#F59E0B]">Designed for the Future.</span>
+                Infrastructure with purpose.
               </h1>
             </motion.div>
 
@@ -324,10 +310,56 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-300 mb-8 max-w-2xl"
+              className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl"
             >
-              Your global partner in design and construction supervision
+              Bringing Ethiopian engineering ambition to life with clean design,
+              local insight, and confident delivery.
             </motion.p>
+
+            <div className="grid gap-4 sm:grid-cols-3 mb-8">
+              {[
+                {
+                  label: "Regional Reach",
+                  value: "15+ Countries",
+                },
+                {
+                  label: "Project Value",
+                  value: "15+ Billion ETB",
+                },
+                {
+                  label: "Delivery",
+                  value: "40+ Completed Projects",
+                },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-[1.75rem] border border-white/10 bg-white/5 p-4 text-center shadow-xl shadow-[#0F172A]/10"
+                >
+                  <div className="text-sm text-gray-400 uppercase tracking-[0.18em] mb-2">
+                    {item.label}
+                  </div>
+                  <div className="text-xl font-semibold text-white">
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 mb-8">
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-gray-300">
+                <div className="text-[#F59E0B] font-semibold mb-2">
+                  Built for growth
+                </div>
+                Trusted by regional developers and public partners across East
+                Africa.
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-gray-300">
+                <div className="text-[#F59E0B] font-semibold mb-2">
+                  40+ projects
+                </div>
+                A mix of commercial towers, airports, and civic infrastructure.
+              </div>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -337,14 +369,14 @@ export default function App() {
             >
               <a
                 href="#projects"
-                className="group px-8 py-4 bg-[#F59E0B] text-[#0F172A] font-semibold hover:bg-[#F59E0B]/90 transition-all duration-300 flex items-center justify-center gap-2"
+                className="group inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#F59E0B] px-8 py-4 text-[#0F172A] font-semibold hover:bg-[#F59E0B]/90 transition-all duration-300 shadow-lg shadow-[#F59E0B]/20"
               >
                 View Projects
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#contact"
-                className="px-8 py-4 border-2 border-white text-white font-semibold hover:bg-white hover:text-[#0F172A] transition-all duration-300 flex items-center justify-center"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-white bg-white/5 px-8 py-4 text-white font-semibold hover:bg-white hover:text-[#0F172A] transition-all duration-300"
               >
                 Get in Touch
               </a>
@@ -416,12 +448,12 @@ export default function App() {
                 <img
                   src="https://images.unsplash.com/photo-1710701455648-e85f21bf3a79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600"
                   alt="Modern building"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover rounded-[2rem]"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1686524904908-02b541949e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600"
                   alt="Airport terminal"
-                  className="w-full h-64 object-cover mt-8"
+                  className="w-full h-64 object-cover mt-8 rounded-[2rem]"
                 />
               </div>
               <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10"></div>
@@ -528,7 +560,7 @@ export default function App() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer"
+                className="group cursor-pointer rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl shadow-[#000000]/10 transition-transform duration-300 hover:-translate-y-2 hover:shadow-[#F59E0B]/20"
               >
                 <div className="relative overflow-hidden mb-4 h-64">
                   <ImageWithFallback
@@ -788,33 +820,11 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#F59E0B] flex items-center justify-center">
-                  <span
-                    className="text-[#0F172A] font-bold text-xl"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
-                    HH
-                  </span>
-                </div>
-                <div>
-                  <div
-                    className="font-bold text-lg"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
-                    HH Consulting
-                  </div>
-                  <div className="text-[#F59E0B] text-xs">
-                    Architects & Engineers
-                  </div>
-                </div>
-              </div>
               <p className="text-gray-400">
                 Building Africa's future through innovative engineering and
                 architectural excellence.
               </p>
             </div>
-
             <div>
               <h4
                 className="font-bold mb-4"
