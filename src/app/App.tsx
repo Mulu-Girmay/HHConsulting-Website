@@ -316,35 +316,6 @@ export default function App() {
               local insight, and confident delivery.
             </motion.p>
 
-            <div className="grid gap-4 sm:grid-cols-3 mb-8">
-              {[
-                {
-                  label: "Regional Reach",
-                  value: "15+ Countries",
-                },
-                {
-                  label: "Project Value",
-                  value: "15+ Billion ETB",
-                },
-                {
-                  label: "Delivery",
-                  value: "40+ Completed Projects",
-                },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-[1.75rem] border border-white/10 bg-white/5 p-4 text-center shadow-xl shadow-[#0F172A]/10"
-                >
-                  <div className="text-sm text-gray-400 uppercase tracking-[0.18em] mb-2">
-                    {item.label}
-                  </div>
-                  <div className="text-xl font-semibold text-white">
-                    {item.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <div className="grid gap-4 sm:grid-cols-2 mb-8">
               <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-gray-300">
                 <div className="text-[#F59E0B] font-semibold mb-2">
