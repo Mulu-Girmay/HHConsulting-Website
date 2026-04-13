@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import {
   Menu,
@@ -31,9 +31,115 @@ type Project = {
   imageAlt: string;
 };
 
+const aboutSlides = [
+  { src: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80", label: "Architectural Design" },
+  { src: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80", label: "Project Management" },
+  { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80", label: "Infrastructure" },
+  { src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80", label: "Engineering" },
+  { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80", label: "Urban Development" },
+  { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80", label: "Sustainable Architecture" },
+  { src: "https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=800&q=80", label: "Structural Engineering" },
+  { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", label: "Construction" },
+];
+
+function AboutSlideshow() {
+  const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setSlide((p) => (p + 1) % aboutSlides.length), 3000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="relative"
+    >
+      <div className="relative overflow-hidden rounded-2xl bg-gray-900 shadow-2xl h-[280px] sm:h-[360px] lg:h-[420px]">
+        {/* Slides */}
+        {aboutSlides.map((s, i) => (
+          <motion.img
+            key={s.src}
+            src={s.src}
+            alt={s.label}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: i === slide ? 1 : 0 }}
+            transition={{ duration: 1 }}
+          />
+        ))}
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/30 to-transparent" />
+
+        {/* Logo watermark top-right */}
+        <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
+          <img src={logoImage} alt="HH Consulting" className="h-8 w-auto opacity-90" />
+        </div>
+
+        {/* Current slide label */}
+        <div className="absolute bottom-14 left-0 right-0 text-center">
+          <motion.span
+            key={slide}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-block bg-[#F59E0B]/90 text-[#0F172A] text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full"
+          >
+            {aboutSlides[slide].label}
+          </motion.span>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5">
+          {aboutSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setSlide(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === slide ? "bg-[#F59E0B] w-5" : "bg-white/40 w-1.5"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Decorative blobs */}
+      <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10 rounded-full" />
+      <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#F59E0B]/5 -z-10 rounded-full" />
+    </motion.div>
+  );
+}
+
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [heroSlide, setHeroSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      src: "https://images.unsplash.com/photo-1756227584303-f1400daaa69d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920",
+      alt: "Modern Architecture",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1920&q=80",
+      alt: "Addis Ababa Skyline",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80",
+      alt: "Infrastructure Construction",
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
 
   const services = [
     {
@@ -304,14 +410,92 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden pb-16 sm:pb-20">
-        {/* Background Image */}
+        {/* Background Slideshow */}
         <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1756227584303-f1400daaa69d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
-            alt="Modern Architecture"
-            className="w-full h-full object-cover"
-          />
+          {heroSlides.map((slide, i) => (
+            <motion.img
+              key={slide.src}
+              src={slide.src}
+              alt={slide.alt}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: i === heroSlide ? 1 : 0 }}
+              transition={{ duration: 1.2 }}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/95 via-[#0F172A]/80 to-transparent"></div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setHeroSlide(i)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === heroSlide ? "bg-[#F59E0B] w-6" : "bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Floating Project Thumbnails */}
+        <div className="absolute right-4 lg:right-12 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-4">
+          {[
+            {
+              icon: <Building2 className="w-5 h-5" />,
+              label: "Buildings",
+              img: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=120&q=80",
+            },
+            {
+              icon: <Construction className="w-5 h-5" />,
+              label: "Infrastructure",
+              img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=120&q=80",
+            },
+            {
+              icon: <Cog className="w-5 h-5" />,
+              label: "Engineering",
+              img: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=120&q=80",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, x: 60 }}
+              animate={[
+                { opacity: 1, x: 0, transition: { delay: 0.6 + i * 0.25, duration: 0.7, ease: "easeOut" } },
+                { y: [0, -6, 0], transition: { delay: 1.2 + i * 0.25, duration: 2.8 + i * 0.4, repeat: Infinity, ease: "easeInOut" } },
+              ]}
+              whileHover={{ scale: 1.12, x: -6, boxShadow: "0 0 22px 4px rgba(245,158,11,0.55)" }}
+              className="relative w-24 h-20 rounded-xl overflow-hidden border border-[#F59E0B]/50 shadow-lg cursor-pointer group"
+              style={{ boxShadow: "0 0 0px 0px rgba(245,158,11,0)" }}
+            >
+              {/* Pulsing border glow */}
+              <motion.div
+                className="absolute inset-0 rounded-xl border-2 border-[#F59E0B] pointer-events-none"
+                animate={{ opacity: [0.2, 0.7, 0.2] }}
+                transition={{ duration: 2 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              <img src={item.img} alt={item.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-[#0F172A]/60 group-hover:bg-[#0F172A]/30 transition-colors duration-300" />
+
+              {/* Shimmer sweep on hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none"
+              />
+
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white gap-1">
+                <motion.span
+                  className="text-[#F59E0B]"
+                  animate={{ rotate: [0, 8, -8, 0] }}
+                  transition={{ duration: 3 + i * 0.6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  {item.icon}
+                </motion.span>
+                <span className="text-[10px] font-semibold tracking-wide drop-shadow">{item.label}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Hero Content */}
@@ -326,13 +510,36 @@ export default function App() {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
+              {/* Credibility Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 bg-[#F59E0B]/15 border border-[#F59E0B]/40 rounded-full px-3 py-1.5 mb-5"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse flex-shrink-0" />
+                <span className="text-[#F59E0B] text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-widest uppercase">
+                  Est. 2014 · Addis Ababa, Ethiopia
+                </span>
+              </motion.div>
+
               <h1
                 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                Landmark buildings.
+                <span className="text-[#F59E0B]">Landmark</span> buildings.
                 <br />
-                Infrastructure with purpose.
+                Infrastructure with{" "}
+                <span className="relative inline-block">
+                  purpose
+                  <motion.span
+                    className="absolute left-0 -bottom-1 h-[3px] bg-[#F59E0B] rounded-full"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 0.8, delay: 1 }}
+                  />
+                </span>
+                .
               </h1>
             </motion.div>
 
@@ -412,227 +619,71 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
+              {/* Logo badge */}
+              <div className="flex items-center gap-3 mb-6">
+                <img src={logoImage} alt="HH Consulting Logo" className="h-10 w-auto" />
+                <div className="h-2 w-16 bg-[#F59E0B]" />
+              </div>
+
               <h2
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Building Africa's Future
               </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+
+              <p className="text-lg text-gray-700 mb-5 leading-relaxed">
                 HH Consulting Architects & Engineers PLC is a multidisciplinary
                 consulting firm delivering high-quality architectural and
                 engineering solutions for projects across Ethiopia and Djibouti.
               </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                The company specializes in building design, infrastructure
-                development, construction supervision, and environmental and
-                feasibility studies. With a team of skilled engineers,
-                architects, and technical experts, HH Consulting integrates
-                innovation, sustainability, and local expertise into every
-                project.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                From high-rise buildings and airports to roads, bridges, and
-                irrigation systems, the firm is committed to delivering
-                practical, efficient, and impactful solutions that support
-                community development and economic growth.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
+
+              {/* Inline image chip — team meeting */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="flex items-center gap-3 mb-5 rounded-xl overflow-hidden border border-gray-200 shadow-sm"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=160&h=80&q=80"
+                  alt="Team meeting"
+                  className="w-20 sm:w-28 h-16 object-cover flex-shrink-0"
+                />
+                <p className="text-sm text-gray-600 pr-3 leading-relaxed">
+                  The company specializes in building design, infrastructure
+                  development, and construction supervision — integrating
+                  innovation and local expertise into every project.
+                </p>
+              </motion.div>
+
+              {/* Inline image chip — blueprints */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="flex items-center gap-3 mb-5 rounded-xl overflow-hidden border border-gray-200 shadow-sm"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=160&h=80&q=80"
+                  alt="Engineering blueprints"
+                  className="w-20 sm:w-28 h-16 object-cover flex-shrink-0"
+                />
+                <p className="text-sm text-gray-600 pr-3 leading-relaxed">
+                  From high-rise buildings and airports to roads, bridges, and
+                  irrigation systems — delivering practical, impactful solutions
+                  that support community growth.
+                </p>
+              </motion.div>
+
+              <p className="text-lg text-gray-700 italic border-l-4 border-[#F59E0B] pl-4">
                 We create with heart, and build with mind.
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              {/* Storytelling Animation Container */}
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8">
-                {/* Animated Background Images */}
-                <div className="absolute inset-0">
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80"
-                      alt="Architectural design"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 1,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
-                      alt="Engineering blueprints"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
-                      alt="Construction site"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 3,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
-                      alt="Bridge construction"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 4,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
-                      alt="Environmental planning"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 5,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
-                      alt="Modern infrastructure"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 6,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=800&q=80"
-                      alt="Urban development"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 2,
-                      delay: 7,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                    }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
-                      alt="Construction management"
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-                </div>
-
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/70"></div>
-
-                {/* Story Text Overlay */}
-                <div className="relative z-10 text-center text-white">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                  >
-                    <h3 className="text-2xl font-bold mb-4">Our Journey</h3>
-                    <div className="space-y-3 text-sm leading-relaxed max-w-md mx-auto">
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1 }}
-                      >
-                        From concept to completion, we transform visions into
-                        reality
-                      </motion.p>
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 2 }}
-                      >
-                        Every project tells a story of innovation and excellence
-                      </motion.p>
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 3 }}
-                      >
-                        Building sustainable solutions for Africa's future
-                      </motion.p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-
-              <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10 rounded-full"></div>
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#F59E0B]/5 -z-10 rounded-full"></div>
-            </motion.div>
+            <AboutSlideshow />
           </div>
         </div>
       </motion.section>
@@ -642,8 +693,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
             <div className="h-2 w-20 bg-[#F59E0B] mx-auto mb-6"></div>
@@ -664,8 +716,9 @@ export default function App() {
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
                 whileHover={{ y: -12, scale: 1.02 }}
                 whileTap={{ y: -12, scale: 1.02 }}
                 className="relative overflow-hidden rounded-xl bg-white border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-500 group cursor-pointer"
@@ -692,7 +745,7 @@ export default function App() {
                 </div>
 
                 {/* Content Container */}
-                <div className="relative p-8 h-full flex flex-col min-h-[400px]">
+                <div className="relative p-6 sm:p-8 h-full flex flex-col min-h-[280px] sm:min-h-[400px]">
                   {/* Icon with enhanced animation */}
                   <motion.div
                     className="text-[#F59E0B] mb-6 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12"
@@ -866,13 +919,13 @@ export default function App() {
                 className="text-center"
               >
                 <div
-                  className="text-5xl lg:text-6xl font-bold text-[#0F172A] mb-2 flex items-baseline justify-center gap-1"
+                  className="text-3xl sm:text-4xl lg:text-6xl font-bold text-[#0F172A] mb-2 flex items-baseline justify-center gap-1"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   {stat.value.includes("Billion ETB") ? (
                     <>
                       <span>{stat.value.split(" Billion ETB")[0]}</span>
-                      <span className="text-2xl lg:text-3xl">Billion ETB</span>
+                      <span className="text-sm sm:text-xl lg:text-3xl">Billion ETB</span>
                     </>
                   ) : (
                     stat.value
@@ -1078,7 +1131,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-[#0F172A] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <p className="text-gray-400">
                 Building Africa's future through innovative engineering and
