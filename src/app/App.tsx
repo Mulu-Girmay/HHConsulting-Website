@@ -34,6 +34,7 @@ type Project = {
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showAbout, setShowAbout] = useState(false);
 
   const services = [
     {
@@ -41,30 +42,64 @@ export default function App() {
       title: "Architectural Design",
       description:
         "Innovative and sustainable architectural solutions for modern living and commercial spaces.",
+      image:
+        "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=600&q=80",
     },
     {
       icon: <Cog className="w-12 h-12" />,
       title: "Engineering Systems",
       description:
         "Comprehensive MEP and structural engineering design for complex projects.",
+      image:
+        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80",
     },
     {
       icon: <Construction className="w-12 h-12" />,
       title: "Infrastructure Development",
       description:
         "Planning and design of roads, bridges, airports, and critical infrastructure.",
+      image:
+        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
     },
     {
       icon: <ClipboardCheck className="w-12 h-12" />,
       title: "Project Management",
       description:
         "Full-service construction supervision and project coordination from concept to completion.",
+      image:
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80",
     },
     {
       icon: <TreePine className="w-12 h-12" />,
       title: "Environmental Assessment",
       description:
         "Environmental impact studies and sustainability consulting for responsible development.",
+      image:
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      icon: <Building2 className="w-12 h-12" />,
+      title: "Urban Planning",
+      description:
+        "Strategic urban development planning and zoning for sustainable city growth.",
+      image:
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      icon: <Cog className="w-12 h-12" />,
+      title: "Structural Engineering",
+      description:
+        "Advanced structural analysis and design for buildings and infrastructure.",
+      image:
+        "https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      icon: <Construction className="w-12 h-12" />,
+      title: "Construction Consulting",
+      description:
+        "Expert construction methodology and material selection consulting.",
+      image:
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
     },
   ];
 
@@ -269,7 +304,7 @@ export default function App() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden pb-16 sm:pb-20">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -281,8 +316,8 @@ export default function App() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-24 lg:pt-28">
-          <div className="relative max-w-3xl lg:max-w-4xl bg-white/2 backdrop-blur-sm border border-white/10 rounded-[2rem] p-6 sm:p-8 lg:p-12 shadow-2xl shadow-[#000000]/20 overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 sm:pt-24 lg:pt-28">
+          <div className="relative max-w-3xl lg:max-w-4xl bg-white/10 backdrop-blur-sm border border-white/10 rounded-[2rem] p-5 sm:p-8 lg:p-12 shadow-2xl shadow-[#000000]/20 overflow-hidden">
             <div className="pointer-events-none absolute -top-8 -right-8 h-32 w-32 rounded-full bg-[#F59E0B]/10 blur-3xl"></div>
             <div className="pointer-events-none absolute -bottom-10 left-6 h-28 w-28 rounded-full bg-[#F59E0B]/15 blur-3xl"></div>
 
@@ -332,18 +367,20 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3"
             >
-              <a
-                href="#projects"
-                className="group inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#F59E0B] px-8 py-4 text-[#0F172A] font-semibold hover:bg-[#F59E0B]/90 transition-all duration-300 shadow-lg shadow-[#F59E0B]/20"
+              <button
+                onClick={() => setShowAbout(!showAbout)}
+                className="group inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-[#F59E0B] px-6 py-3 sm:px-8 sm:py-4 text-[#0F172A] font-semibold hover:bg-[#F59E0B]/90 transition-all duration-300 shadow-lg shadow-[#F59E0B]/20"
               >
-                View Projects
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+                {showAbout ? "Hide About" : "Learn About Us"}
+                <ChevronRight
+                  className={`w-5 h-5 ml-2 transition-transform ${showAbout ? "rotate-90" : "group-hover:translate-x-1"}`}
+                />
+              </button>
               <a
                 href="#contact"
-                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-white bg-white/5 px-8 py-4 text-white font-semibold hover:bg-white hover:text-[#0F172A] transition-all duration-300"
+                className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-white bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-white font-semibold hover:bg-white hover:text-[#0F172A] transition-all duration-300"
               >
                 Get in Touch
               </a>
@@ -369,70 +406,250 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
-                style={{ fontFamily: "Poppins, sans-serif" }}
+      {showAbout && (
+        <motion.section
+          id="about"
+          className="py-20 lg:py-32 bg-white"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
               >
-                Building Africa's Future
-              </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                HH Consulting Architects & Engineers PLC is a multidisciplinary
-                consulting firm delivering high-quality architectural and
-                engineering solutions for projects across Ethiopia and Djibouti.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                The company specializes in building design, infrastructure
-                development, construction supervision, and environmental and
-                feasibility studies. With a team of skilled engineers,
-                architects, and technical experts, HH Consulting integrates
-                innovation, sustainability, and local expertise into every
-                project.
-              </p>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                From high-rise buildings and airports to roads, bridges, and
-                irrigation systems, the firm is committed to delivering
-                practical, efficient, and impactful solutions that support
-                community development and economic growth.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                We create with heart, and build with mind.
-              </p>
-            </motion.div>
+                <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  Building Africa's Future
+                </h2>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  HH Consulting Architects & Engineers PLC is a
+                  multidisciplinary consulting firm delivering high-quality
+                  architectural and engineering solutions for projects across
+                  Ethiopia and Djibouti.
+                </p>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  The company specializes in building design, infrastructure
+                  development, construction supervision, and environmental and
+                  feasibility studies. With a team of skilled engineers,
+                  architects, and technical experts, HH Consulting integrates
+                  innovation, sustainability, and local expertise into every
+                  project.
+                </p>
+                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                  From high-rise buildings and airports to roads, bridges, and
+                  irrigation systems, the firm is committed to delivering
+                  practical, efficient, and impactful solutions that support
+                  community development and economic growth.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  We create with heart, and build with mind.
+                </p>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                <img
-                  src="https://images.unsplash.com/photo-1710701455648-e85f21bf3a79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600"
-                  alt="Modern building"
-                  className="w-full h-64 object-cover rounded-[2rem]"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1686524904908-02b541949e3c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600"
-                  alt="Airport terminal"
-                  className="w-full h-64 object-cover mt-8 rounded-[2rem]"
-                />
-              </div>
-              <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10"></div>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                {/* Storytelling Animation Container */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8">
+                  {/* Animated Background Images */}
+                  <div className="absolute inset-0">
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80"
+                        alt="Architectural design"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 1,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80"
+                        alt="Engineering blueprints"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+                        alt="Construction site"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 3,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+                        alt="Bridge construction"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 4,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+                        alt="Environmental planning"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 5,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
+                        alt="Modern infrastructure"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 6,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1503387837-b154d5074bd2?auto=format&fit=crop&w=800&q=80"
+                        alt="Urban development"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        delay: 7,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                      }}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+                        alt="Construction management"
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  </div>
+
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-black/70"></div>
+
+                  {/* Story Text Overlay */}
+                  <div className="relative z-10 text-center text-white">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.5 }}
+                    >
+                      <h3 className="text-2xl font-bold mb-4">Our Journey</h3>
+                      <div className="space-y-3 text-sm leading-relaxed max-w-md mx-auto">
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 1, delay: 1 }}
+                        >
+                          From concept to completion, we transform visions into
+                          reality
+                        </motion.p>
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 1, delay: 2 }}
+                        >
+                          Every project tells a story of innovation and
+                          excellence
+                        </motion.p>
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 1, delay: 3 }}
+                        >
+                          Building sustainable solutions for Africa's future
+                        </motion.p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-[#F59E0B]/10 -z-10 rounded-full"></div>
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#F59E0B]/5 -z-10 rounded-full"></div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </motion.section>
+      )}
 
       {/* Services Section */}
       <section id="services" className="py-20 lg:py-32 bg-gray-50">
@@ -456,7 +673,7 @@ export default function App() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -465,20 +682,30 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="bg-white p-8 border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-300 group"
+                className="relative overflow-hidden rounded-xl bg-white border-b-4 border-transparent hover:border-[#F59E0B] transition-all duration-300 group"
               >
-                <div className="text-[#0F172A] group-hover:text-[#F59E0B] transition-colors mb-6">
-                  {service.icon}
+                <div className="absolute inset-0">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300" />
                 </div>
-                <h3
-                  className="text-xl font-bold text-[#0F172A] mb-4"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {service.description}
-                </p>
+                <div className="relative p-8 h-full flex flex-col">
+                  <div className="text-[#F59E0B] group-hover:scale-110 transition-transform mb-6">
+                    {service.icon}
+                  </div>
+                  <h3
+                    className="text-xl font-bold text-white mb-4 group-hover:text-[#F59E0B] transition-colors duration-300"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-200 leading-relaxed flex-grow">
+                    {service.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -664,8 +891,19 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 lg:py-32 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="contact"
+        className="py-20 lg:py-32 bg-gray-50 relative overflow-hidden"
+      >
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+            alt="Construction site background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -674,12 +912,12 @@ export default function App() {
             >
               <div className="h-2 w-20 bg-[#F59E0B] mb-6"></div>
               <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] mb-6"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Get in Touch
               </h2>
-              <p className="text-lg text-gray-700 mb-8">
+              <p className="text-lg text-gray-200 mb-8">
                 Ready to discuss your next project? Our team is here to help
                 bring your vision to life.
               </p>
@@ -690,10 +928,8 @@ export default function App() {
                     <MapPin className="w-6 h-6 text-[#0F172A]" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#0F172A] mb-1">
-                      Head Office
-                    </h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-bold text-white mb-1">Head Office</h4>
+                    <p className="text-gray-300">
                       22 Mazoriya, Efrata Building, 3rd Floor
                       <br />
                       Addis Ababa, Ethiopia
@@ -706,10 +942,10 @@ export default function App() {
                     <Phone className="w-6 h-6 text-[#0F172A]" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#0F172A] mb-1">Phone</h4>
-                    <p className="text-gray-600">011 8683830</p>
-                    <p className="text-gray-600">011 6672951</p>
-                    <p className="text-gray-600">+251 913592121</p>
+                    <h4 className="font-bold text-white mb-1">Phone</h4>
+                    <p className="text-gray-300">011 8683830</p>
+                    <p className="text-gray-300">011 6672951</p>
+                    <p className="text-gray-300">+251 913592121</p>
                   </div>
                 </div>
 
@@ -718,8 +954,8 @@ export default function App() {
                     <Mail className="w-6 h-6 text-[#0F172A]" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#0F172A] mb-1">Email</h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-bold text-white mb-1">Email</h4>
+                    <p className="text-gray-300">
                       hhconsultingarchitectengineers@gmail.com
                     </p>
                   </div>
@@ -731,7 +967,7 @@ export default function App() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 lg:p-12 border-l-4 border-[#F59E0B]"
+              className="bg-white/95 backdrop-blur-sm p-8 lg:p-12 border-l-4 border-[#F59E0B] shadow-2xl"
             >
               <form className="space-y-6">
                 <div>

@@ -7,36 +7,57 @@ export function ImageWithFallback(
   props: React.ImgHTMLAttributes<HTMLImageElement>,
 ) {
   const [didError, setDidError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleError = () => {
     setDidError(true);
+    setIsLoading(false);
+  };
+
+  const handleLoad = () => {
+    setIsLoading(false);
   };
 
   const { src, alt, style, className, ...rest } = props;
 
-  return didError ? (
-    <div
-      className={`inline-block bg-gray-100 text-center align-middle rounded-full ${className ?? ""}`}
-      style={style}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        <img
-          src={ERROR_IMG_SRC}
-          alt="Error loading image"
-          className="w-full h-full object-cover rounded-full"
-          {...rest}
-          data-original-url={src}
-        />
+  if (didError) {
+    return (
+      <div
+        className={`inline-block bg-gray-100 text-center align-middle rounded-full ${className ?? ""}`}
+        style={style}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <img
+            src={ERROR_IMG_SRC}
+            alt="Error loading image"
+            className="w-full h-full object-cover rounded-full"
+            {...rest}
+            data-original-url={src}
+          />
+        </div>
       </div>
+    );
+  }
+
+  return (
+    <div className={`relative ${className ?? ""}`} style={style}>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80">
+          <div className="h-10 w-10 rounded-full border-4 border-[#F59E0B]/30 border-t-[#F59E0B] animate-spin" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt ?? ""}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${
+          isLoading ? "opacity-0" : "opacity-100"
+        }`}
+        style={style}
+        loading="lazy"
+        onError={handleError}
+        onLoad={handleLoad}
+        {...rest}
+      />
     </div>
-  ) : (
-    <img
-      src={src}
-      alt={alt}
-      className={className}
-      style={style}
-      {...rest}
-      onError={handleError}
-    />
   );
 }
